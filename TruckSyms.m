@@ -113,7 +113,7 @@ omegaB_dot = (-1/(L4*(L1 + L2)))*...
 % Compile acceleration vectors for EOMs
 vA_dot_vec = [vAx_dot vAy_dot 0]';
 alphaA_vec = [0 0 omegaA_dot]';
-alphaB_vec = [0 0 omegaB_dot]';
+alphaB_vec = [0 0 (omegaA_dot + omegaB_dot)]';
 aA_vec = vA_dot_vec + cross(omegaA_vec,vA_vec);
 aB_vec = simplify(...
     aA_vec +...
@@ -146,8 +146,8 @@ R3 = [-lambda3*sin(gamma) lambda3*cos(gamma) 0]';
 dL_A_dt = mA*aA_vec;
 dL_B_dt = mB*aB_vec;
 % ...and angular momenta
-dH_A_dt = I_A*alphaA_vec + cross(omegaA_vec,I_A*omegaA_vec);
-dH_B_dt = I_B*alphaB_vec + cross(omegaB_vec,I_B*omegaB_vec);
+dH_A_dt = I_A*alphaA_vec;
+dH_B_dt = I_B*alphaB_vec;
 
 % Define the EOMs as a system of equations
 Eqs = [
